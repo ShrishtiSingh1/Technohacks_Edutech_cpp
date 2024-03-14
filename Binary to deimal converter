@@ -1,0 +1,40 @@
+#include <iostream>
+using namespace std;
+
+int binary_to_decimal() {
+    int binary;
+    std::cout << "\nEnter Binary digits for conversion: ";
+    std::cin >> binary;
+
+    int decimal = 0, base = 1;
+    while (binary > 0) {
+        int last_digit = binary % 10;
+        binary = binary / 10;
+        decimal += last_digit * base;
+        base = base * 2;
+    }
+
+    std::cout << "Decimal notation of the binary input is: " << decimal << std::endl;
+    return decimal;
+}
+
+void repeat_process() {
+    int repeat;
+    std::cout << "Do you want to do more conversions?" << std::endl << "1. Yes" << std::endl << "2. No" << std::endl;
+    std::cin >> repeat;
+    if (repeat == 1) {
+       binary_to_decimal();
+       repeat_process();
+    } else {
+        std::cout << "Thank you :))" << std::endl;
+    }
+}
+
+int main() {
+    std::cout << "\t\t\t\t\t\t\tBINARY TO DECIMAL CONVERTER" << std::endl;
+    
+    binary_to_decimal();
+    repeat_process();
+
+    return 0;
+}
