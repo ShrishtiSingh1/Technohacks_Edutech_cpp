@@ -1,0 +1,47 @@
+#include <iostream>
+using namespace std;
+
+void temperature_conversion() {
+    int temp_choice;
+    cout << "\nEnter temperature conversion choice :";
+    cin >> temp_choice;
+
+    if (temp_choice == 1) {
+        float temp_Celsius;
+        cout << "Enter temperature in Celsius: ";
+        cin >> temp_Celsius;
+        float temp_Fahrenheit = (temp_Celsius * 9/5) + 32;
+        cout << "Temperature from Celcius to Fahrenheit is: " << temp_Fahrenheit << endl;
+    }
+    else if (temp_choice == 2) {
+        float temp_Fahrenheit;
+        cout << "Enter temperature in Fahrenheit: ";
+        cin >> temp_Fahrenheit;
+        float temp_Celsius = (temp_Fahrenheit - 32) * 5/9;
+        cout << "Temperature from Fahrenheit to Celsius is: " << temp_Celsius << endl;
+    }
+    else {
+        cout << "Invalid Input. Please provide a valid conversion type." << endl;
+    }
+}
+
+void repeat_process() {
+    int repeat;
+    cout << "Do you want to do more conversions?" << endl << "1. Yes" << endl << "2. No" << endl;
+    cin >> repeat;
+    if (repeat == 1) {
+        temperature_conversion();
+        repeat_process();
+    }
+    else {
+        cout << "Thank you :))" << endl;
+    }
+}
+
+int main() {
+    cout <<"\t\t\t\t\t\t\tTEMPERATURE CONVERTER "<< endl <<"\nWhich conversion would you like to go with?" << endl << "1. Celsius to Fahrenheit" << endl << "2. Fahrenheit to Celsius" << endl;
+    temperature_conversion();
+    repeat_process();
+
+    return 0;
+}
