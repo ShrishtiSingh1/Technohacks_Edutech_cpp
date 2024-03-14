@@ -1,0 +1,94 @@
+#include <iostream>
+#include <cstdlib>  // to generate radom no using c++ library k/as cstlib-performs numerous functions.
+#include <ctime>  //to generate different random no each time
+
+const int EASY_CHANCES = 10;
+const int MEDIUM_CHANCES = 7;
+const int DIFFICULT_CHANCES = 5;
+
+void play_game(int secretNumber);
+int secret_number();
+void repeat_process();
+
+int main() {
+    std::cout << "\t\t\t\t\t\tWelcome To Number Guessing Game" << std::endl
+              << "\nDegree of difficulties -" << std::endl
+              << "(1) Easy\t\t\t"
+              << "(2) Medium\t\t\t"
+              << "(3) Difficult\t\t\t"
+              << "(4) Exit Game" << std::endl;
+
+    int secretNumber = secret_number();
+    play_game(secretNumber);
+    repeat_process();
+
+    return 0;
+}
+
+void play_game(int secretNumber) {
+    int difficulty_degree;
+    std::cout << "\nEnter the difficulty level : ";
+    std::cin >> difficulty_degree;
+    int player_choice;
+    int chances;
+
+    if (difficulty_degree == 1) {
+        chances = EASY_CHANCES;
+        std::cout << "You have " << chances << " chances to find the secret number between 1 to 100" << std::endl;
+    } else if (difficulty_degree == 2) {
+        chances = MEDIUM_CHANCES;
+        std::cout << "You have " << chances << " chances to find the secret number between 1 to 100" << std::endl;
+    } else if (difficulty_degree == 3) {
+        chances = DIFFICULT_CHANCES;
+        std::cout << "You have " << chances << " chances to find the secret number between 1 to 100" << std::endl;
+    } else if (difficulty_degree == 4) {
+        std::cout << "Thank you :))" << std::endl;
+        exit(0);
+    } else {
+        std::cout << "Invalid input :(, please a degree from 1 to 4." << std::endl;
+        return;
+    }
+
+    while (chances > 0) {
+        std::cout << "\nEnter number :";
+        std::cin >> player_choice;
+
+        if (player_choice == secretNumber) {
+            std::cout << "Well done! You've won the game " << player_choice << " is the secret number." << std::endl;
+            return;
+        } else if (player_choice < 1 || player_choice > 100) {
+            std::cout << "Invalid input, please provide a valid input. Enter one number in the range of 1 to 100." << std::endl;
+        } else {
+            std::cout << "No, " << player_choice << " is not the right number" << std::endl;
+            if (player_choice > secretNumber) {
+                std::cout << "The secret number is smaller than the number you have chosen" << std::endl;
+            } else {
+                std::cout << "The secret number is greater than the number you have chosen" << std::endl;
+            }
+            chances--;
+            std::cout << chances << " Chances left. " << std::endl;
+            if (chances == 0) {
+                std::cout << "You couldn't find the secret number, it was " << secretNumber << ". You lose!!\n\n";
+                return;
+            }
+        }
+    }
+}
+
+int secret_number() {
+    srand(time(0));
+    return 1 + (rand() % 100);
+}
+
+void repeat_process() {
+    int repeat;
+    std::cout << "Do you want to play again?" << std::endl << "1. Yes" << std::endl << "2. No" << std::endl;
+    std::cin >> repeat;
+    if (repeat == 1) {
+        int secretNumber = secret_number();
+        play_game(secretNumber);
+        repeat_process();
+    } else {
+        std::cout << "Thank you :))" << std::endl;
+    }
+}
